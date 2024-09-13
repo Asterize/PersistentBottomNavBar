@@ -7,27 +7,22 @@ class _BottomNavStyle10 extends StatelessWidget {
   }) : super(key: key);
   final _NavBarEssentials navBarEssentials;
 
-  Widget _buildItem(final PersistentBottomNavBarItem item,
-          final bool isSelected, final double? height) =>
+  Widget _buildItem(final PersistentBottomNavBarItem item, final bool isSelected, final double? height) =>
       navBarEssentials.navBarHeight == 0
           ? const SizedBox.shrink()
           : AnimatedContainer(
-              width: isSelected ? 120 : 50,
+              width: isSelected ? 164 : 64,
               height: height! / 1.5,
               duration: navBarEssentials.itemAnimationProperties.duration,
               curve: navBarEssentials.itemAnimationProperties.curve,
               padding: EdgeInsets.all(item.contentPadding),
               decoration: isSelected
                   ? BoxDecoration(
-                      color: isSelected
-                          ? item.activeColorPrimary
-                          : navBarEssentials.backgroundColor.withOpacity(0),
+                      color: isSelected ? item.activeColorPrimary : navBarEssentials.backgroundColor.withOpacity(0),
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                     )
                   : BoxDecoration(
-                      color: isSelected
-                          ? item.activeColorPrimary
-                          : navBarEssentials.backgroundColor.withOpacity(0),
+                      color: isSelected ? item.activeColorPrimary : navBarEssentials.backgroundColor.withOpacity(0),
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
               child: Container(
@@ -42,13 +37,9 @@ class _BottomNavStyle10 extends StatelessWidget {
                         data: IconThemeData(
                             size: item.iconSize,
                             color: isSelected
-                                ? (item.activeColorSecondary ??
-                                    item.activeColorPrimary)
-                                : item.inactiveColorPrimary ??
-                                    item.activeColorPrimary),
-                        child: isSelected
-                            ? item.icon
-                            : item.inactiveIcon ?? item.icon,
+                                ? (item.activeColorSecondary ?? item.activeColorPrimary)
+                                : item.inactiveColorPrimary ?? item.activeColorPrimary),
+                        child: isSelected ? item.icon : item.inactiveIcon ?? item.icon,
                       ),
                     ),
                     if (item.title == null)
@@ -64,12 +55,10 @@ class _BottomNavStyle10 extends StatelessWidget {
                                   style: item.textStyle != null
                                       ? (item.textStyle!.apply(
                                           color: isSelected
-                                              ? (item.activeColorSecondary ??
-                                                  item.activeColorPrimary)
+                                              ? (item.activeColorSecondary ?? item.activeColorPrimary)
                                               : item.inactiveColorPrimary))
                                       : TextStyle(
-                                          color: item.activeColorSecondary ??
-                                              item.activeColorPrimary,
+                                          color: item.activeColorSecondary ?? item.activeColorPrimary,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12),
                                 )),
@@ -95,25 +84,18 @@ class _BottomNavStyle10 extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   if (index != navBarEssentials.selectedIndex) {
-                    navBarEssentials.items[index].iconAnimationController
-                        ?.forward();
-                    navBarEssentials.items[navBarEssentials.selectedIndex]
-                        .iconAnimationController
-                        ?.reverse();
+                    navBarEssentials.items[index].iconAnimationController?.forward();
+                    navBarEssentials.items[navBarEssentials.selectedIndex].iconAnimationController?.reverse();
                   }
                   if (navBarEssentials.items[index].onPressed != null) {
-                    navBarEssentials.items[index].onPressed!(
-                        navBarEssentials.selectedScreenBuildContext);
+                    navBarEssentials.items[index].onPressed!(navBarEssentials.selectedScreenBuildContext);
                   } else {
                     navBarEssentials.onItemSelected?.call(index);
                   }
                 },
                 child: Container(
                   color: Colors.transparent,
-                  child: _buildItem(
-                      item,
-                      navBarEssentials.selectedIndex == index,
-                      navBarEssentials.navBarHeight),
+                  child: _buildItem(item, navBarEssentials.selectedIndex == index, navBarEssentials.navBarHeight),
                 ),
               ),
             );
