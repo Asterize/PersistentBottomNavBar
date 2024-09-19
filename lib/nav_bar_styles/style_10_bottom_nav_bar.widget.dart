@@ -19,7 +19,7 @@ class _BottomNavStyle10 extends StatelessWidget {
               decoration: isSelected
                   ? BoxDecoration(
                       color: isSelected ? item.activeColorPrimary : navBarEssentials.backgroundColor.withOpacity(0),
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(90)),
                     )
                   : BoxDecoration(
                       color: isSelected ? item.activeColorPrimary : navBarEssentials.backgroundColor.withOpacity(0),
